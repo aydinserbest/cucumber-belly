@@ -1,11 +1,26 @@
-package io.cucumber.skeleton;
+package io.belly.skeleton;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class StepDefinitions {
+    Belly belly = new Belly();
+
     @Given("I have {int} cukes in my belly")
     public void I_have_cukes_in_my_belly(int cukes) {
-        Belly belly = new Belly();
         belly.eat(cukes);
+    }
+
+    @When("I wait {int} hour")
+    public void I_wait_hour(int hours) {
+        // Zaman simülasyonu veya bekleme mantığı
+        System.out.println("Waiting for " + hours + " hour(s).");
+    }
+
+    @Then("my belly should growl")
+    public void my_belly_should_growl() {
+        // Growl metodu tetiklenmeli veya sonuç kontrol edilmeli
+        System.out.println("Belly growls!");
     }
 }
