@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class StepDefinitions {
+public class BellyStepDefinitions {
     Belly belly = new Belly();
 
     @Given("I have {int} cukes in my belly")
