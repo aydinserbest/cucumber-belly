@@ -5,3 +5,8 @@ Feature: Bank application
     Given I have $100 in my account
     When I request $20
     Then $20 should be dispensed
+@Bank
+  Scenario: Successful  from an account
+    Given I have $250 in my account
+    When I request $20
+    Then $20 should be dispensed
