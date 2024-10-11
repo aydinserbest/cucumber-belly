@@ -1,4 +1,4 @@
-package io.belly.skeleton;
+package io.belly.skeleton.step_definitions;
 
 import io.cucumber.java.en.Given;
 
