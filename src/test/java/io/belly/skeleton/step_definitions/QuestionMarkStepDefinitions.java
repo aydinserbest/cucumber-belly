@@ -1,6 +1,7 @@
 package io.belly.skeleton.step_definitions;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class QuestionMarkStepDefinitions {
@@ -43,6 +44,14 @@ public class QuestionMarkStepDefinitions {
      */
     @When("^Tara (?:buys|has bought) a ticket$")
     public void tara_buys_a_ticket() {
+    }
+    @Then("(s)he has been a member/customer for {int} year(s)")
+   // @Then("^(?:he|she) has been a (?:member|customer) for (\\d+) year(?:s?)$")
+        //  alttaki örnekte, sondaki year(s?) ifadesindeki s opsiyonel olmuş olması gerekirken
+        //  group capturing gibi algılanıyor ve parametre istiyor
+        // ama üstlerde cucumber(s?) örneğinde opsiyonel kabul etmişti BU HATA NİYE??????
+    //@Then("^(?:he|she) has been a (?:member|customer) for (\\d+) year(s?)$")
+    public void she_has_been_a_member_for_5_years(int years) {
     }
 
 

@@ -24,3 +24,10 @@ Feature: options
      When Tara buys a ticket
      When Tara has bought a ticket
 
+  Scenario: flight
+    Then he has been a member for 5 years
+    Then she has been a member for 1 year
+    And he has been a customer for 5 years
+
+
+
