@@ -1,6 +1,7 @@
 package io.belly.skeleton.step_definitions;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 
 public class DifferentCharactersStepDefinition {
    @Given("^the phone number \\((\\d{3})\\) (\\d{7}) belongs to John$")
@@ -63,4 +64,59 @@ Herhangi bir uzantıyı yakalamak için ikinci regex'i kullanabilirsin.
     @Given("^the server with IP ((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)) is active$")
 
      */
+    @Given("^the birthdate is (\\d{2})/(\\d{2})/(\\d{4})$")
+    public void theBirthdateIs(String day, String month, String year) {
+        System.out.println("The birthdate is: " + day + "/" + month + "/" + year);
+    }
+    @Given("the file path is {word}")
+    //@Given("^the file path is (.+)$")
+    //@Given("^the file path is ([A-Za-z]:\\\\[\\w]+\\\\[\\w]+\\\\[\\w]+)$")
+    //@Given("^the file path is ([A-Za-z]:\\\\(?:[^\\\\]+\\\\)+[^\\\\]+)$")
+    public void theFilePathIs(String filePath) {
+        System.out.println("The file path is: " + filePath);
+    }
+    /*
+    Regex'te (.+)$ ifadesi, dosya yolunun tamamını esnek bir şekilde yakalamak için kullanılan basit ve güçlü bir yapı. Şimdi bunu adım adım açıklayalım:
+
+Regex Yapısı:
+. (Nokta):
+
+. regex'te, herhangi bir karakteri temsil eder.
+Yani, bir harf, rakam, boşluk, nokta, özel karakter fark etmeksizin
+herhangi bir karakteri yakalayabilir.
+Bu nedenle, dosya yolunda yer alan her türlü karakteri
+(örneğin, C, U, s, \, J, o, h, n, vs.) yakalayabilir.
++ (Artı):
++ işareti, bir veya daha fazla karakterin tekrarlanabileceğini belirtir.
+Yani, . + ifadesi, herhangi bir karakterden bir veya daha fazlasını yakalar.
+Bu, tek bir karakterli veya çok uzun bir metni de yakalayabilir.
+Bu, dizinlerin isimlerinin uzunluğu veya dosya yolunun uzunluğu fark etmeksizin
+tüm metni yakalamaya olanak tanır.
+$ (Dolar İşareti):
+
+$ işareti, satırın sonunu temsil eder.
+Yani, dosya yolunun tamamı bu noktada sona erer ve regex,
+metnin sonuna kadar olan kısmı yakalar.
+Bu Regex'in Özelliği:
+(.+)$: Bu ifade, herhangi bir uzunluktaki dosya yolunu
+ve herhangi bir karakteri yakalar ve bunun satırın sonuna kadar olduğunu belirtir.
+Örneğin, bu regex, dosya yolu fark etmeksizin
+C:\Users\John\Documents,
+D:\MyFiles\Report.txt
+gibi dosya yollarını tamamen yakalayacaktır.
+
+(.+)$ ifadesi ile herhangi bir dosya yolu (uzun veya kısa fark etmez) yakalanır
+ve filePath değişkenine atanır.
+Dosya yolu ne kadar karmaşık ya da uzun olursa olsun,
+bu regex tüm karakterleri kapsar ve dosya yolunu sorunsuz şekilde yakalar.
+Sonuç:
+Bu regex oldukça esnektir ve herhangi bir dosya yolunu tamamen yakalayabilir.
+Eğer dosya yolunun formatı çok karmaşık değilse
+ve spesifik bir format doğrulaması yapmaya gerek yoksa,
+bu gibi basit regex yapıları kullanışlıdır
+     */
+    @When("^I transfer \\$(\\d+) from my (\\w+) Account into my (\\w+) Account$")
+    public void iTransferFromMyAccountIntoMyAccount(int amount, String sourceAccount, String targetAccount) {
+        System.out.println("I transfer $" + amount + " from my " + sourceAccount + " Account into my " + targetAccount + " Account");
+    }
 }

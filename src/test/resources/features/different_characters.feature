@@ -19,3 +19,6 @@ Feature: Different regex types
   Scenario: File path
       Given the file path is C:\Users\John\Documents
 
+  Scenario: Account
+      When I transfer $500 from my Savings Account into my Checking Account
+
