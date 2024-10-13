@@ -1,6 +1,7 @@
 package io.belly.skeleton.step_definitions;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 
 public class QuestionMarkStepDefinitions {
     /*
@@ -26,4 +27,23 @@ public class QuestionMarkStepDefinitions {
     //boşluk bırakmazsak have kelimesi zorunlu olur
     public void i_have_request_to_access_the_system() {
     }
+    @When("^I (?:visit|go to) the homepage$")
+    public void i_go_to_the_homepage() {
+    }
+    @When("^(she|he) purchases a ticket$")
+    public void she_purchases_a_ticket() {
+    }
+    /*
+
+
+    @Given("^I have \\$(100|250) in my account$")
+    public void i_have_in_my_account(int amount) {
+    }
+
+     */
+    @When("^Tara (?:buys|has bought) a ticket$")
+    public void tara_buys_a_ticket() {
+    }
+
+
 }
