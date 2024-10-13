@@ -1,6 +1,9 @@
 @different_characters
 Feature: Different regex types
 
+  Scenario: File path
+    Given the file path is C:\Users\John\Documents
+
   Scenario: Phone number with 10 digits
       Given the phone number (123) 4567890 belongs to John
 
@@ -15,9 +18,6 @@ Feature: Different regex types
 
   Scenario: Birthdate entry
       Given the birthdate is 15/08/1990
-
-  Scenario: File path
-      Given the file path is C:\Users\John\Documents
 
   Scenario: Account
       When I transfer $500 from my Savings Account into my Checking Account

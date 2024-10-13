@@ -68,9 +68,17 @@ Herhangi bir uzantıyı yakalamak için ikinci regex'i kullanabilirsin.
     public void theBirthdateIs(String day, String month, String year) {
         System.out.println("The birthdate is: " + day + "/" + month + "/" + year);
     }
-    @Given("the file path is {word}")
+    //@Given("the file path is {word}")
     //@Given("^the file path is (.+)$")
+
     //@Given("^the file path is ([A-Za-z]:\\\\[\\w]+\\\\[\\w]+\\\\[\\w]+)$")
+        //  \\w+ veya [\\w]+ kullanılabilir , köşelide, + dışarda olur
+
+    //@Given("^the file path is ([A-Za-z]:\\\\\\w+\\\\\\w+\\\\\\w+)$")
+
+    // alttaki yöntemde, variable'ı tek olarak almaz, ayrı ayrı alır, metoda 4 variable 'ı paramtre geçmemiz gerekir
+    //@Given("^the file path is ([A-Za-z]):\\\\(\\w+)\\\\(\\w+)\\\\(\\w+)$")
+
     //@Given("^the file path is ([A-Za-z]:\\\\(?:[^\\\\]+\\\\)+[^\\\\]+)$")
     public void theFilePathIs(String filePath) {
         System.out.println("The file path is: " + filePath);
@@ -115,6 +123,28 @@ Eğer dosya yolunun formatı çok karmaşık değilse
 ve spesifik bir format doğrulaması yapmaya gerek yoksa,
 bu gibi basit regex yapıları kullanışlıdır
      */
+
+    ///
+     /*
+     iki versiyon arasında aslında teknik olarak fark yok, çünkü ikisi de aynı sonucu verir. Ancak fark şu şekildedir:
+
+İlk versiyon:
+
+
+@Given("^the file path is ([A-Za-z]:\\\\[\\w]+\\\\[\\w]+\\\\[\\w]+)$")
+[\\w] ifadesi bir karakter sınıfı belirtir. Bu karakter sınıfı alfabedeki harfleri, rakamları ve alt çizgi (_) karakterini içerir. Köşeli parantezler içindeki \\w, aynı anlama gelir.
+Köşeli parantezler kullanmak gereksizdir çünkü \\w zaten bir karakter sınıfıdır. Bu yüzden köşeli parantezlere gerek kalmaz, ancak yanlış da değildir.
+İkinci versiyon:
+
+
+@Given("^the file path is ([A-Za-z]:\\\\\\w+\\\\\\w+\\\\\\w+)$")
+Bu versiyon daha sade bir yazımdır. Köşeli parantezleri kullanmak yerine doğrudan \\w+ kullanılır. Bu da harf, rakam veya alt çizgiden oluşan bir karakter dizisini yakalar.
+Özet:
+İşlevsel olarak fark yok. Her iki regex de aynı şeyi yapar.
+İkinci versiyon, daha sade ve okunabilir bir yapı sunar çünkü \\w zaten bir karakter sınıfı olduğundan köşeli parantezlere gerek yoktur.
+Tercih genellikle daha basit olanı seçmek yönünde olur, bu yüzden ikinci versiyon daha yaygın olarak tercih edilebilir.
+Sonuç olarak, ikinci yapı daha sade ve tercih edilen bir yöntemdir.
+    */
     @When("^I transfer \\$(\\d+) from my (\\w+) Account into my (\\w+) Account$")
     public void iTransferFromMyAccountIntoMyAccount(int amount, String sourceAccount, String targetAccount) {
         System.out.println("I transfer $" + amount + " from my " + sourceAccount + " Account into my " + targetAccount + " Account");
