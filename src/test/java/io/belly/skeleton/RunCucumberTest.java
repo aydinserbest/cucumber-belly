@@ -6,9 +6,9 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectPackages("features")
+@SelectPackages("features.data_table")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-@IncludeTags("board")
+@IncludeTags("name_and_birth_asMap")
 //@ConfigurationParameter(key = "cucumber.filter.tags", value = "@Bank")  // This is an alternative to the above line, but did not work
 //@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "io.belly.skeleton")
 public class RunCucumberTest {
