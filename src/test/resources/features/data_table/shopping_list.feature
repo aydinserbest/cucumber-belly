@@ -20,13 +20,13 @@ Feature: Shopping List
   Scenario: Add items to shopping list
     Given the following items are in the shopping list
       | item  | quantity |
-      | apple | 5        |
+      | apple | 6        |
       | banana| 10       |
     When I add the following items to the shopping list
       | item  | quantity |
-      | apple | 5        |
-      | banana| 10       |
+      | apple | 4        |
+      | banana| 5       |
     Then the shopping list should contain the following items
       | item  | quantity |
       | apple | 10       |
-      | banana| 20       |
+      | banana| 15       |
