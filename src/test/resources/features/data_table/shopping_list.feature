@@ -14,7 +14,7 @@ Feature: Shopping List
     Then my shopping list should contains those lists:
       | Onions   | Potatoes | Bananas  |newspaper|
       | Sausages | Apples   | Relish   |coke     |
-      | orange | water   | brood   |ginger       |
+      #| orange | water   | brood   |ginger       |
 
 @long_list
   Scenario: Add items to shopping list

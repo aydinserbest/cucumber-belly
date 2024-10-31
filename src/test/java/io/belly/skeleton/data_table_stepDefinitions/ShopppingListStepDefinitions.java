@@ -1,9 +1,7 @@
 package io.belly.skeleton.data_table_stepDefinitions;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import java.util.List;
 
@@ -22,10 +20,11 @@ public class ShopppingListStepDefinitions {
     }
     @Then("my shopping list should contains those lists:")
     public void myShoppingListShouldContains(DataTable dataTable) {
-        List<List<String>> lists = dataTable.asLists();
-        System.out.println(lists);
-        System.out.println(lists.size());
-        System.out.println(lists.getFirst());
+        //List<List<String>> lists = dataTable.asLists();
+        List<String> list = dataTable.asList();
+        System.out.println(list);
+        System.out.println(list.size());
+        System.out.println(list.getFirst());
 
         /*
         tabloyu aldığımızda ilk satır, başlıklar ise mesela, genelde öyle olur
@@ -36,8 +35,8 @@ public class ShopppingListStepDefinitions {
         
         */
 
-        List<List<String>> dataWithoutHeaders = lists.subList(1, lists.size());//ilk satırı atlayarak geri kalan satırları alır
-        System.out.println(dataWithoutHeaders);
+       //// List<List<String>> dataWithoutHeaders = lists.subList(1, lists.size());//ilk satırı atlayarak geri kalan satırları alır
+        //System.out.println(dataWithoutHeaders);
 
 
     }

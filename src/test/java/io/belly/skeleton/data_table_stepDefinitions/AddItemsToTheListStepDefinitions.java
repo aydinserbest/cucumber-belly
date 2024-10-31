@@ -4,14 +4,12 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddItemsToTheListStepDefinitions {
-    private List<List<String>> shoppingItems = new ArrayList<>();
     @Given("the following items are in the shopping list")
     public void theFollowingItemsAreInTheShoppingList(DataTable dataTable) {
-        shoppingItems = dataTable.asLists();
+        List<List<String>> shoppingItems = dataTable.asLists();
     }
     @When("I add the following items to the shopping list")
     public void iAddTheFollowingItemsToTheShoppingList(DataTable dataTable) {
