@@ -12,7 +12,7 @@ public class UserRepository {
         users.put("user3@example.com", new User("user3@example.com", "xyz!7890"));
     }
     // Kullanıcı ekleme metodu
-    public boolean addUser(User user) {
+    public void addUser(User user) {
         // Bu kontrolü kaldırıyoruz; AuthService bu kontrolü zaten yapıyor
         users.put(user.getUsername(), user);
     }

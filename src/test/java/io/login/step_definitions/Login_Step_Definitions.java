@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.login.AuthService;
+import io.login.User;
 import io.login.UserRepository;
 
 import java.util.List;
@@ -22,7 +23,9 @@ public class Login_Step_Definitions {
         for (Map<String, String> row : users) {
             String username = row.get("username");
             String password = row.get("password");
-            userRepository.addUser(username, password);
+            // User nesnesi oluşturuyoruz ve UserRepository'ye ekliyoruz
+            User user = new User(username, password);
+            userRepository.addUser(user);
         }
 
 
