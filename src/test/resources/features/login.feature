@@ -1,15 +1,10 @@
-Feature: User login
-    Background:
-        Given the following users are registered:
-            | username           | password    |
-            | user1@example.com  | pass123     |
-            | user2@example.com  | abc$1234    |
-            | user3@example.com  | xyz!7890    |
+Feature: Shopping Cart
 
-    Scenario: Login with valid credentials
-        When the user tries to login with username "user1@example.com" and password "pass123"
-        Then the login should be successful
-
-    Scenario: Login with invalid credentials
-        When the user tries to login with username "user1@example.com" and password "wrongpass"
-        Then the login should be unsuccessful
+    Scenario: Add items to the shopping cart and verify total quantity
+        Given the following items are added to the shopping cart:
+            | item   | quantity |
+            | apple  | 3        |
+            | banana | 2        |
+            | orange | 5        |
+        When I check the total quantity in the shopping cart
+        Then the total quantity should be 10
