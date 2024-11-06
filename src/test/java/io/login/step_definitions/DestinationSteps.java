@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DestinationSteps {
-    @ParameterType(name = "string-values",value = ".*")
+    @ParameterType(name = "string-cities",value = ".*")
     public List<String> stringValues(String destinationList) {
         //return Stream.of(destinationList.split(","))
         //      .map(String::trim)
@@ -20,7 +20,7 @@ public class DestinationSteps {
          */
     }
 
-    @Then("the available destinations should be {string-values}")
+    @Then("the available destinations should be {string-cities}")
     public void availableDestinations(List<String> destinations) {
         for (String destination : destinations) {
             System.out.println(destination);
