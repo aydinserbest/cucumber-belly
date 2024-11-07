@@ -3,21 +3,17 @@ package io.login.step_definitions;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Then;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DestinationSteps {
     @ParameterType(name = "string-cities",value = ".*")
     public List<String> stringValues(String destinationList) {
-        //return Stream.of(destinationList.split(","))
-        //      .map(String::trim)
-          //      .collect(Collectors.toList());
-        return Arrays.asList(destinationList.split(","));
-        /*
-        Stream.of() yerine Arrays.asList() kullanarak listeye dönüştürmeyi daha kısa hale getirdik.
-        map(String::trim) ifadesini kaldırdık. Bu, liste öğelerini trimlemek yerine olduğu gibi alır;
-        ancak boşlukları temizlemek gerekiyorsa yine de map(String::trim) kullanılabilir.
-         */
+        return Stream.of(destinationList.split(","))
+             .map(String::trim)
+                .collect(Collectors.toList());
+
     }
 
     @Then("the available destinations should be {string-cities}")
