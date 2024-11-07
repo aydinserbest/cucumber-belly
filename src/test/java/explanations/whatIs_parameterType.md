@@ -224,3 +224,126 @@ Bu ifade, boşluklu ve aynen bu şekilde kullanılmalıdır.
 Frequent Flyer member ifadesi, boşluklu yazılması sayesinde 
 feature dosyasında Gold Frequent Flyer member, Silver Frequent Flyer member gibi ifadelerle eşleşir. 
 @ParameterType bu tür ifadeleri yakalayarak, belirttiğin seviyeye sahip bir FrequentFlyerMember nesnesi oluşturur.
+
+
+Feature dosyasında örneğin "John is a Silver Frequent Flyer member" adımını yazıyorsun.
+
+@ParameterType, "Silver" seviyesini FrequentFlyerMember sınıfına bağlı frequentFlyer metoduna geçiriyor:
+@ParameterType("(Gold|Silver|Bronze) Frequent Flyer member")
+public FrequentFlyerMember frequentFlyer(String level) {
+    return FrequentFlyerMember.withLevel(level); // Sadece seviyeyi ayarlıyor, ismi değil
+}
+Step Definition (adım tanımı) metodunda ise, 
+name (John) parametresi String name olarak ve FrequentFlyerMember nesnesi de member parametresi olarak geliyor:
+
+@Given("{string} is a {frequentFlyer}")
+public void defineFrequentFlyerMember(String name, FrequentFlyerMember member) {
+    member.setName(name); // İsmi burada ayarlıyoruz
+    System.out.println(name + " is a " + member.getLevel() + " Frequent Flyer member.");
+}
+Sonuç: 
+Böylece, member nesnesi Silver seviyesinde ama ismi henüz ayarlanmamış olarak geliyor. 
+Adım tanımı içinde member.setName(name); diyerek ismi ekliyoruz.
+
+Yani, @ParameterType sayesinde FrequentFlyerMember nesnesi sadece seviye ile oluşturulmuş oluyor, 
+ismini adım tanımında ekliyoruz
+
+
+
+
+feature dosyasındaki "Then the available destinations should be Berlin, Paris, New York" ifadesi 
+@ParameterType ile List<String> türüne dönüştürülmek isteniyor. 
+Ancak bu dönüşüm, stringValues metodu ile sağlanacak; 
+yani @ParameterType metodu destinationList adlı tek bir String parametresi alıyor 
+ve bunu virgül ile ayırıp List<String> haline getiriyor.
+
+Adım Adım Ne İstiyoruz?
+Feature Dosyasındaki İfade:
+
+Then the available destinations should be Berlin, Paris, New York
+Bu ifade, @ParameterType sayesinde bir String olarak alınıyor. 
+Yani "Berlin, Paris, New York" şeklinde tek bir String olarak geliyor.
+
+@ParameterType ile Dönüştürme:
+
+@ParameterType(".*")
+public List<String> stringValues(String destinationList) {
+    return Stream.of(destinationList.split(","))
+            .map(String::trim)
+            .collect(Collectors.toList());
+}
+Bu stringValues metodu, gelen destinationList stringini virgüllere göre ayırarak 
+"Berlin", "Paris", "New York" gibi her bir öğeyi List<String> içine koyuyor.
+
+Adım Tanımlaması (Step Definition): Adım tanımında artık doğrudan List<String> olarak destinations parametresini alabiliyoruz:
+
+@Then("the available destinations should be {stringValues}")
+public void availableDestinations(List<String> destinations) {
+    for (String destination : destinations) {
+        System.out.println(destination);
+    }
+}
+Özetle Ne Elde Ediyoruz?
+Feature dosyasındaki "Berlin, Paris, New York" ifadesi stringValues ile List<String> haline geliyor.
+@ParameterType, gelen String değeri split ile ayırarak List<String> türüne dönüştürüyor, 
+böylece availableDestinations metodunda List<String> destinations parametresi olarak kullanabiliyoruz.
+Yani amacımız, feature dosyasındaki metni @ParameterType aracılığıyla List<String> türüne dönüştürmek.
+
+
+
+Parametre türlerini kendimiz @ParameterType kullanmadan nasıl yöneteceğimizi görmek için aynı örneği 
+@ParameterType olmadan yazalım. Bu durumda, step definition (adım tanımlaması) içinde gelen metni 
+manuel olarak işlemek zorunda kalırız.
+
+@ParameterType Kullanmadan Örnek:
+Önceki örnekte, “Altın Üye” gibi bir seviyeyi @ParameterType ile otomatik olarak bir nesneye dönüştürmüştük. 
+Şimdi aynı işlemi manuel olarak yapacağız.
+
+1. Adım: Adımı Tanımlama
+Feature dosyasındaki adım şöyle olsun:
+
+gherkin
+Copy code
+Given kullanıcı Altın Üye olarak tanımlanmış
+2. Step Definition (Adım Tanımlaması) Yazma
+@ParameterType kullanmadığımız için, "Altın Üye", "Gümüş Üye" gibi seviyeleri 
+adım tanımlaması içinde manuel olarak kontrol etmemiz gerekir. Gelen metni kontrol etmek için if veya switch yapısı kullanacağız.
+
+import io.cucumber.java.en.Given;
+
+public class UyeAdimlari {
+
+    @Given("kullanıcı {string} Üye olarak tanımlanmış")
+    public void kullanıcıTanımlama(String seviye) {
+        String üyeSeviyesi;
+
+        // Gelen seviyeyi kontrol ederek uygun nesneyi veya değeri atıyoruz
+        switch (seviye) {
+            case "Altın":
+                üyeSeviyesi = "Altın";
+                break;
+            case "Gümüş":
+                üyeSeviyesi = "Gümüş";
+                break;
+            case "Standart":
+                üyeSeviyesi = "Standart";
+                break;
+            case "Platin":
+                üyeSeviyesi = "Platin";
+                break;
+            default:
+                throw new IllegalArgumentException("Geçersiz üye seviyesi: " + seviye);
+        }
+
+        System.out.println("Kullanıcı seviyesi: " + üyeSeviyesi);
+    }
+}
+Açıklama:
+Burada adım tanımında {string} kullanarak @ParameterType'ın işlevini manuel olarak gerçekleştiriyoruz.
+Adım tanımındaki {string} parametresi "Altın", "Gümüş" gibi metinleri doğrudan seviye değişkenine geçiriyor.
+switch yapısıyla bu değeri kontrol ediyor ve her seviyeye uygun bir işlem yapıyoruz.
+Özet:
+Parametre Tipi Olmadan: @ParameterType olmadan gelen parametreyi (burada seviye) manuel olarak işliyoruz.
+Dezavantaj: Eğer çok fazla seviyemiz olursa if-else veya switch ile kontrol etmek karmaşık hale gelebilir.
+@ParameterType kullanmak bu işlemi çok daha düzenli ve kısa hale getiriyor, 
+fakat mümkün olan durumlarda manuel kontrol de yapılabilir.
