@@ -88,11 +88,15 @@ Fakat @ParameterType ile doğrudan bir FrequentFlyerMember nesnesi olarak alabil
 level değişkenine göre üyelik seviyesini belirler.
 earnPoints metodu ile üyelik seviyesine göre puan ekler.
 getPoints ve getLevel metotları ile puan ve seviye bilgilerini döndürür.
+
 withLevel Metodunun İşlevi
 withLevel metodu, FrequentFlyerMember sınıfında statik bir metot olarak tanımlandı.
-new FrequentFlyerMember(null, level) ifadesiyle, FrequentFlyerMember sınıfından bir nesne oluşturuluyor ve ismi null olarak bırakılıyor (ismi daha sonra setName ile adım tanımında belirteceğiz).
+new FrequentFlyerMember(null, level) ifadesiyle, FrequentFlyerMember sınıfından bir nesne oluşturuluyor 
+ve ismi null olarak bırakılıyor (ismi daha sonra setName ile adım tanımında belirteceğiz).
+
 Neden withLevel Kullandık?
-Bu tür bir statik yardımcı metot, @ParameterType içinde belirli bir seviyede (örneğin, Gold, Silver, Bronze) nesne oluşturmamıza olanak tanır ve bu işlemi kısa ve düzenli hale getirir.
+Bu tür bir statik yardımcı metot, @ParameterType içinde belirli bir seviyede 
+(örneğin, Gold, Silver, Bronze) nesne oluşturmamıza olanak tanır ve bu işlemi kısa ve düzenli hale getirir.
 
 Artık withLevel metodu, @ParameterType'ın içinden çağrılabilir ve FrequentFlyerMember nesnesi oluşturabilir.
 
@@ -151,22 +155,24 @@ Bu, "özel bir nesneye dönüştürmek" dediğimiz şeyin tam olarak nasıl çal
 
 İlk adımda, ismi "John" ve seviyesi "Silver" olan bir FrequentFlyerMember nesnesi oluşturalım.
 
-Bu nesneyi, FrequentFlyerMember sınıfının yapıcı (constructor) metodunu doğrudan kullanarak basitçe oluşturabiliriz. Şöyle yapalım:
+Bu nesneyi, FrequentFlyerMember sınıfının yapıcı (constructor) metodunu doğrudan kullanarak basitçe oluşturabiliriz. 
+Şöyle yapalım:
 
 1. FrequentFlyerMember Nesnesini Oluşturalım
-java
-Copy code
+
 FrequentFlyerMember john = new FrequentFlyerMember("John", "Silver");
-Bu satır, "John" isminde ve "Silver" seviyesinde bir FrequentFlyerMember nesnesi oluşturur. Şimdi john adında bir nesnemiz var ve seviyesi Silver olarak ayarlandı.
+
+Bu satır, "John" isminde ve "Silver" seviyesinde bir FrequentFlyerMember nesnesi oluşturur. 
+Şimdi john adında bir nesnemiz var ve seviyesi Silver olarak ayarlandı.
 
 
-withLevel metodunu Cucumber step definition'dan bağımsız olarak da kullanabiliriz. Bu metot, FrequentFlyerMember nesnesini yalnızca üyelik seviyesini belirterek oluşturmak için tasarlandı. Ancak withLevel metodu sadece seviyesi olan bir nesne oluşturduğu için ismi daha sonra ayrı bir şekilde set etmemiz gerekiyor.
+withLevel metodunu Cucumber step definition'dan bağımsız olarak da kullanabiliriz. 
+Bu metot, FrequentFlyerMember nesnesini yalnızca üyelik seviyesini belirterek oluşturmak için tasarlandı.
+Ancak withLevel metodu sadece seviyesi olan bir nesne oluşturduğu için ismi daha sonra ayrı bir şekilde set etmemiz gerekiyor.
 
 withLevel ile Nesne Oluşturma
 Eğer withLevel metodunu kullanarak bir nesne oluşturmak istersek, şu şekilde yapabiliriz:
 
-java
-Copy code
 FrequentFlyerMember john = FrequentFlyerMember.withLevel("Silver");
 john.setName("John"); // İsmi sonradan ayarlıyoruz
 Ne Yaptık?
@@ -180,36 +186,41 @@ Feature dosyasında örneğin "John is a Silver Frequent Flyer member" adımın�
 
 @ParameterType, "Silver" seviyesini FrequentFlyerMember sınıfına bağlı frequentFlyer metoduna geçiriyor:
 
-java
-Copy code
 @ParameterType("(Gold|Silver|Bronze) Frequent Flyer member")
 public FrequentFlyerMember frequentFlyer(String level) {
     return FrequentFlyerMember.withLevel(level); // Sadece seviyeyi ayarlıyor, ismi değil
 }
-Step Definition (adım tanımı) metodunda ise, name (John) parametresi String name olarak ve FrequentFlyerMember nesnesi de member parametresi olarak geliyor:
+Step Definition (adım tanımı) metodunda ise, name (John) parametresi String name olarak 
+ve FrequentFlyerMember nesnesi de member parametresi olarak geliyor:
 
-java
-Copy code
 @Given("{string} is a {frequentFlyer}")
 public void defineFrequentFlyerMember(String name, FrequentFlyerMember member) {
     member.setName(name); // İsmi burada ayarlıyoruz
     System.out.println(name + " is a " + member.getLevel() + " Frequent Flyer member.");
 }
-Sonuç: Böylece, member nesnesi Silver seviyesinde ama ismi henüz ayarlanmamış olarak geliyor. Adım tanımı içinde member.setName(name); diyerek ismi ekliyoruz.
+Sonuç: Böylece, member nesnesi Silver seviyesinde ama ismi henüz ayarlanmamış olarak geliyor. 
+Adım tanımı içinde member.setName(name); diyerek ismi ekliyoruz.
 
-Yani, @ParameterType sayesinde FrequentFlyerMember nesnesi sadece seviye ile oluşturulmuş oluyor, ismini adım tanımında ekliyoruz
+Yani, @ParameterType sayesinde FrequentFlyerMember nesnesi sadece seviye ile oluşturulmuş oluyor, 
+ismini adım tanımında ekliyoruz
 
-@ParameterType("(Gold|Silver|Bronze) Frequent Flyer member") ifadesindeki "Frequent Flyer member" kısmı, senaryoda kullanılan metinle eşleşmesini sağlayan bir kalıptır. Bu kalıp, feature dosyasındaki adımların FrequentFlyerMember nesnesine dönüştürülmesini sağlar.
+@ParameterType("(Gold|Silver|Bronze) Frequent Flyer member") ifadesindeki "Frequent Flyer member" kısmı, 
+senaryoda kullanılan metinle eşleşmesini sağlayan bir kalıptır.
+Bu kalıp, feature dosyasındaki adımların FrequentFlyerMember nesnesine dönüştürülmesini sağlar.
 
 Örneğin, feature dosyasında şu adım yazılı olsun:
 
-gherkin
-Copy code
 Given John is a Silver Frequent Flyer member
-Buradaki "Silver Frequent Flyer member" ifadesi, @ParameterType'da tanımlanan (Gold|Silver|Bronze) Frequent Flyer member kalıbına uyuyor. Boşluklu yazılması, feature dosyasında bu ifadenin nasıl geçtiğini tanımlamak içindir; yani Gold, Silver veya Bronze seviyesinin ardından Frequent Flyer member yazılacağını belirtir.
+Buradaki "Silver Frequent Flyer member" ifadesi, 
+@ParameterType'da tanımlanan (Gold|Silver|Bronze) Frequent Flyer member kalıbına uyuyor. 
+Boşluklu yazılması, feature dosyasında bu ifadenin nasıl geçtiğini tanımlamak içindir; 
+yani Gold, Silver veya Bronze seviyesinin ardından Frequent Flyer member yazılacağını belirtir.
 
 Detaylı Açıklama
 (Gold|Silver|Bronze) kısmı, bu @ParameterType'ın sadece "Gold", "Silver" veya "Bronze" kelimeleriyle eşleşeceğini belirtir.
-"Frequent Flyer member" ifadesi, bu kelimelerin ardından geleceğini belirtir. Bu ifade, boşluklu ve aynen bu şekilde kullanılmalıdır.
+"Frequent Flyer member" ifadesi, bu kelimelerin ardından geleceğini belirtir. 
+Bu ifade, boşluklu ve aynen bu şekilde kullanılmalıdır.
 Özetle
-Frequent Flyer member ifadesi, boşluklu yazılması sayesinde feature dosyasında Gold Frequent Flyer member, Silver Frequent Flyer member gibi ifadelerle eşleşir. @ParameterType bu tür ifadeleri yakalayarak, belirttiğin seviyeye sahip bir FrequentFlyerMember nesnesi oluşturur.
+Frequent Flyer member ifadesi, boşluklu yazılması sayesinde 
+feature dosyasında Gold Frequent Flyer member, Silver Frequent Flyer member gibi ifadelerle eşleşir. 
+@ParameterType bu tür ifadeleri yakalayarak, belirttiğin seviyeye sahip bir FrequentFlyerMember nesnesi oluşturur.
