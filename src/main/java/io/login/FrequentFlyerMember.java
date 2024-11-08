@@ -19,7 +19,7 @@ public class FrequentFlyerMember {
         // Seviyeye göre ekstra puan kazandırma
         switch (this.level) {
             case "Gold":
-                this.points += basePoints * 1.5; // %50 daha fazla puan
+                this.points += (int) (basePoints * 1.5); // %50 daha fazla puan
                 break;
             case "Silver":
                 this.points += basePoints; // Normal puan
