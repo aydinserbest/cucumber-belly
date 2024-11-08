@@ -29,13 +29,17 @@ public class FrequentFlyerMember {
         }
     }
 
-    // Getter ve Setter metotları
-    public int getPoints() {
-        return points;
+    /// Getter ve Setter metotları
+    public String getName() {
+        return name;
     }
 
     public String getLevel() {
         return level;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public void setName(String name) {
