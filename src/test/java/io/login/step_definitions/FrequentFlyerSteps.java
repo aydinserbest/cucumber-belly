@@ -7,6 +7,7 @@ import io.login.FrequentFlyerMember;
 public class FrequentFlyerSteps {
     @ParameterType("(Gold|Silver) Frequent Flyer member")
     public FrequentFlyerMember frequentFlyer(String level) {
+
         // Seviyeye göre isimsiz bir FrequentFlyerMember nesnesi oluşturuyoruz
         return FrequentFlyerMember.withLevel(level);
     }
