@@ -126,8 +126,6 @@ System.out.println(name + " kazandığı puan: " + member.getPoints());
 4. Nasıl Çalışır?
    Şimdi, feature dosyamızda şöyle bir senaryo olduğunu düşünelim:
 
-gherkin
-Copy code
 Scenario: Gold üye olarak daha fazla puan kazanma
 Given Cathy is a Gold Frequent Flyer member
 Then she should have 150 points
