@@ -1,8 +1,8 @@
-package io.login.step_definitions;
+package io.login.step_definitions.frequentflyer;
 
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
-import io.login.FrequentFlyerMember;
+import io.login.frequentmembership.FrequentFlyerMember;
 
 public class FrequentFlyerSteps {
     @ParameterType("(Gold|Silver) Frequent Flyer member")

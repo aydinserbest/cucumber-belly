@@ -1,4 +1,4 @@
-package io.login;
+package io.login.frequentmembership;
 
 public class FrequentFlyerMember {
     private String name;
