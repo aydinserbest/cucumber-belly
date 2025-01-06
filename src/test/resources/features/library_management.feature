@@ -1,4 +1,3 @@
-@selectedbooks
 Feature: Library Management
 
   @runnerClassTag
