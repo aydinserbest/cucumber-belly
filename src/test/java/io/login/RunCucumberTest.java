@@ -2,6 +2,8 @@ package io.login;
 
 import org.junit.platform.suite.api.*;
 
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
+
 @Suite
 @IncludeEngines("cucumber")
 //@SelectPackages("features")
@@ -14,7 +16,7 @@ import org.junit.platform.suite.api.*;
 // tek tek -'cucumber.filter.tags=@selectedbooks' did not match this scenario- uyarısı veriyor
 
 //junit-platform.properties dosyası içinden de ayarla bu gibi tag filan run edebiliyoruz
-//@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "io.login.step_definitions")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "io.login.step_definitions")
 
 
 public class RunCucumberTest {
