@@ -1,16 +1,13 @@
 package io.login;
 
-import org.junit.platform.suite.api.IncludeEngines;
-import org.junit.platform.suite.api.IncludeTags;
-import org.junit.platform.suite.api.SelectPackages;
-import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.*;
 
 @Suite
 @IncludeEngines("cucumber")
 @SelectPackages("features")
 //@SelectClasspathResource("features")
 //@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-@IncludeTags("runnerClassTag")  // başa @ YAZMA
+//@IncludeTags("runnerClassTag")  // başa @ YAZMA
 //alttaki configuration parameterdan farklı olarak (junitin bu herhalde) sadece bu tag lı senaryoyu run eder
 //konsole da tek senaryo çıktısı olur
 //ama alttakini kullanınca tüm senaryolarda o tagı arar gibi, konsoleda yazar
